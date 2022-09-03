@@ -1,0 +1,29 @@
+<section>
+  <div class="text-center">
+    <h2>Registro de ingreso de clientes</h2>
+  </div>
+  <br>
+  <table class="table table-info table-striped text-center">
+    <thead>
+    <tr>
+      <th>Hora del dia</th>
+      <th>Registro de clientes</th>
+    </tr>
+  </thead>
+  <tbody class="">
+    <tr *ngFor="let registro of registroClientes">
+      <td>{{registro.hora}}</td>
+      <td>{{registro.contador}}</td>
+    </tr>
+  </tbody>
+  </table>
+  <form [formGroup]="form">
+
+    <!-- <input formControlName="fecha"  id="fecha"  type="date" class="form-control" > -->
+    <!-- <input formControlName="hora" id="hora" type="time" class="form-control" > -->
+    <!-- <input formControlName="contador" id="contador" value="contador" type="number" class="form-control"> -->
+    <button type="submit" class="btn btn-primary">Ingresar registro de clientes</button>
+
+  </form>
+
+</section>
