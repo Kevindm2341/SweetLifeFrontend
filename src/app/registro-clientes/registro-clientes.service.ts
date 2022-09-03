@@ -23,6 +23,9 @@ export class RegistroClientesService {
     create(registro: any): Observable<RegistroClientes>{
       return this.httpClient.post<RegistroClientes>(this.apiUrl, JSON.stringify(registro), this.httpOptions)
     }
+    find(id: number): Observable<RegistroClientes> {
+      return this.httpClient.get<RegistroClientes>(this.apiUrl + id)
+    }
     update(id: number, registro: any): Observable<RegistroClientes>{
       return this.httpClient.put<RegistroClientes>(this.apiUrl + id, JSON.stringify(registro), this.httpOptions)
     }

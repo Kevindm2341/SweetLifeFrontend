@@ -4,6 +4,7 @@ import { RegistroClientes } from '../registro-clientes';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DatePipe, formatDate } from '@angular/common';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-index',
@@ -22,7 +23,8 @@ export class IndexComponent implements OnInit {
 
   constructor(
     public registroClientesService: RegistroClientesService,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +45,7 @@ export class IndexComponent implements OnInit {
 
   CrearRegistroHora() {
     let iterador: number = 0;
-    while (iterador < 24) {
+    while (iterador < 0) {
       this.form = new FormGroup({
         fecha: new FormControl(this.pipe.transform(Date.now(), 'yyyy/MM/dd')),
         hora: new FormControl(`${iterador}:00`),
@@ -60,13 +62,22 @@ export class IndexComponent implements OnInit {
       //this.router.navigateByUrl()
     });
   }
-  modificarClientesHora(){
-    this.form = new FormGroup({
-      fecha: new FormControl(''),
-      hora: new FormControl(''),
-      contador: new FormControl(''),
-    });
+  ObtenerRigistroHora(){
+    this.registroClientesService.find(1).subscribe((data: RegistroClientes)=>{
+      this.registro = data;
+      console.log(this.registro)
+    })
   }
+  modificarClientesHora(){
+    // this.form = new FormGroup({
+    //   fecha: new FormControl(''),
+    //   hora: new FormControl(''),
+    //   contador: new FormControl(''),
+    // });
+  }
+
+
+
 
 
 }
