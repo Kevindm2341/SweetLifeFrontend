@@ -47,7 +47,7 @@ registro!: RegistroClientes;
 
   CrearRegistroHora() {
     let iterador: number = 0;
-    while (iterador < 0) {
+    while (iterador < 24) {
       this.form = new FormGroup({
         fecha: new FormControl(this.pipe.transform(Date.now(), 'yyyy/MM/dd')),
         hora: new FormControl(`${iterador}:00`),
