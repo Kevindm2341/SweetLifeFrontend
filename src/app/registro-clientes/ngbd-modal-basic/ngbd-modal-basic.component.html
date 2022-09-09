@@ -1,50 +1,31 @@
-<ng-template #content let-modal>
-  <div class="modal-header">
-      <h4 class="modal-title"
-          id="modal-basic-title">
-          Geeks of Geeks
-      </h4>
-      <button type="button" class="close"
-              aria-label="Close" (click)=
-              "modal.dismiss('Cross click')">
-
-          <span aria-hidden="true">
-              ×
-          </span>
-      </button>
-  </div>
-  <div class="modal-body">
-      <form>
-          <div class="form-group">
-              <label for="dateOfBirth">
-                  Date of birth
-              </label>
-              <div class="input-group">
-                  <input id="dateOfBirth" class="form-control"
-                      placeholder="yyyy-mm-dd"
-                      name="dp" ngbDatepicker >
-
-                  <div class="input-group-append">
-                      <button class="btn
-                          btn-outline-secondary calendar"
-
-                          type="button">
-                      </button>
-                  </div>
-              </div>
-          </div>
-      </form>
-  </div>
-  <div class="modal-footer">
-      <button type="button"
-          class="btn btn-outline-dark"
-          (click)="modal.close('Save click')">
-          Save
-      </button>
-  </div>
-</ng-template>
-
-<button class="btn btn-lg btn-outline-primary"
-  (click)="open(content)">
-  Popup using Angular and Bootstrap
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" (click)="modal.open(contenido)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Registrar Clientes
 </button>
+<ng-template #contenido let-modal>
+  <!-- Modal -->
+
+
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registro de clientes</h5>
+        <button type="button" class="btn-close" (click)="modal.dismiss()"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="recipient-name" class="col-form-label">Clientes Actuales</label>
+            <input type="text" class="form-control" id="recipient-name">
+          </div>
+          <div class="mb-3">
+            <label for="message-text" class="col-form-label">Ingresar nuevos clientes</label>
+            <textarea class="form-control" id="message-text"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="modal.dismiss()">Close</button>
+        <button type="button" class="btn btn-primary" (click)="modal.close()">Send message</button>
+      </div>
+
+
+</ng-template>

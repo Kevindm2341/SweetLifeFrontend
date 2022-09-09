@@ -13,8 +13,9 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class IndexComponent implements OnInit {
 
-  id: number | undefined;
-  registro: RegistroClientes | undefined;
+public id!: number;
+registro!: RegistroClientes;
+ public _contador: number | undefined;
 
   today: Date = new Date();
   pipe = new DatePipe('en-Us');
@@ -24,15 +25,14 @@ export class IndexComponent implements OnInit {
   constructor(
     public registroClientesService: RegistroClientesService,
     private router: Router,
-    private modalService: NgbModal
+    public modal: NgbModal
   ) {}
 
   ngOnInit(): void {
-    this.registroDia();
-    this.CrearRegistroHora();
 
-    //this.registro.fecha = ;
-    console.log(this.pipe.transform(Date.now(), 'h:mm'));
+    this.CrearRegistroHora();
+    this.registroDia();
+
   }
 
   registroDia() {
@@ -40,7 +40,9 @@ export class IndexComponent implements OnInit {
       .getRegistroDia()
       .subscribe((data: RegistroClientes[]) => {
         this.registroClientes = data;
+
       });
+
   }
 
   CrearRegistroHora() {
@@ -56,28 +58,38 @@ export class IndexComponent implements OnInit {
     }
   }
   insert() {
-    console.log(this.form.value);
 
     this.registroClientesService.create(this.form.value).subscribe((res) => {
-      //this.router.navigateByUrl()
+
     });
   }
-  ObtenerRigistroHora(){
+  ObtenerRigistroHora(contenido: any){
     this.registroClientesService.find(1).subscribe((data: RegistroClientes)=>{
       this.registro = data;
-      console.log(this.registro)
+      console.log(data)
+    this.form = new FormGroup({
+      fecha: new FormControl(this.registro.fecha),
+      hora: new FormControl(this.registro.hora),
+      contador: new FormControl(''),
+
+    });
+    this._contador = this.registro.contador;
+    this.id = this.registro.id;
+    this.modal.open(contenido);
+
     })
+
+
+
   }
   modificarClientesHora(){
-    // this.form = new FormGroup({
-    //   fecha: new FormControl(''),
-    //   hora: new FormControl(''),
-    //   contador: new FormControl(''),
-    // });
+
+    this.form.value.contador += this._contador;
+    console.log(this._contador);
+    this.registroClientesService.update(this.id, this.form.value).subscribe(res => {
+      this.ngOnInit();
+    })
+
   }
-
-
-
-
 
 }

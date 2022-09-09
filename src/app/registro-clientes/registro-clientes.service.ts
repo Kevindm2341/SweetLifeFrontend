@@ -18,8 +18,12 @@ export class RegistroClientesService {
   constructor(private httpClient: HttpClient) { }
 
     getRegistroDia(): Observable<RegistroClientes[]>{
+      console.log(this.httpClient.get<RegistroClientes[]>(this.apiUrl));
+
       return this.httpClient.get<RegistroClientes[]>(this.apiUrl);
+
     }
+
     create(registro: any): Observable<RegistroClientes>{
       return this.httpClient.post<RegistroClientes>(this.apiUrl, JSON.stringify(registro), this.httpOptions)
     }
